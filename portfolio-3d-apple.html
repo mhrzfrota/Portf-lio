@@ -125,11 +125,16 @@
         .hero-content {
             position: absolute;
             top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
+            left: 8%;
+            transform: translateY(-50%);
+            text-align: left;
             z-index: 10;
-            pointer-events: none;
+            pointer-events: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            max-width: 600px;
+            align-items: flex-start;
         }
 
         .hero-title {
@@ -144,12 +149,38 @@
         }
 
         .hero-subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
+            font-size: clamp(0.95rem, 2vw, 1.2rem);
+            line-height: 1.6;
+            max-width: 520px;
             color: rgba(255, 255, 255, 0.8);
             opacity: 0;
             animation: fadeInUp 1.5s ease forwards;
             animation-delay: 0.8s;
             text-shadow: 0 0 20px rgba(118, 75, 162, 0.5);
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.55rem 1rem;
+            border-radius: 999px;
+            background: #4169e1;
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.85rem;
+            letter-spacing: 0.1px;
+            box-shadow: 0 12px 30px rgba(65, 105, 225, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
+            opacity: 0;
+            animation: fadeInUp 1.5s ease forwards;
+            animation-delay: 1s;
+        }
+
+        .hero-cta:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 16px 40px rgba(65, 105, 225, 0.5);
         }
 
         .scroll-indicator {
@@ -229,10 +260,100 @@
             backdrop-filter: blur(10px);
         }
 
+        .project-card.preview {
+            padding: 0;
+            overflow: hidden;
+            background: rgba(10, 10, 20, 0.9);
+        }
+
         .project-card:hover {
             transform: translateY(-10px);
             box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
             border-color: rgba(102, 126, 234, 0.5);
+        }
+
+        .project-cover {
+            position: relative;
+            height: 220px;
+            background: #0a0a14;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            font-weight: 700;
+            letter-spacing: 0.3px;
+            text-shadow: 0 6px 18px rgba(0, 0, 0, 0.35);
+            overflow: hidden;
+        }
+
+        .project-cover::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.35) 100%);
+            z-index: 1;
+        }
+
+        .project-cover img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .project-body {
+            padding: 1.6rem 1.8rem 1.8rem;
+        }
+
+        .project-meta {
+            margin-top: 1rem;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .pill {
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            padding: 0.35rem 0.75rem;
+            border-radius: 999px;
+            font-size: 0.85rem;
+            color: #fff;
+            letter-spacing: 0.2px;
+        }
+
+        .project-actions {
+            margin-top: 1.2rem;
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .project-link {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 700;
+            position: relative;
+        }
+
+        .project-link::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -4px;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(135deg, #4169e1, #6b46c1);
+            opacity: 0.8;
+            transition: transform 0.25s ease;
+            transform-origin: left;
+            transform: scaleX(0);
+        }
+
+        .project-link:hover::after {
+            transform: scaleX(1);
         }
 
         .project-title {
@@ -244,28 +365,6 @@
         .project-description {
             color: rgba(255, 255, 255, 0.7);
             line-height: 1.6;
-        }
-
-        .skills-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 1rem;
-            margin-top: 2rem;
-        }
-
-        .skill-item {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 15px;
-            padding: 1.5rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .skill-item:hover {
-            transform: scale(1.05);
-            border-color: rgba(102, 126, 234, 0.5);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
         }
 
         .contact-form {
@@ -362,6 +461,13 @@
                 font-size: 2.5rem;
             }
             
+            .hero-content {
+                left: 50%;
+                transform: translate(-50%, -50%);
+                width: calc(100% - 2rem);
+                padding: 0 0.5rem;
+            }
+            
             .section {
                 padding: 50px 1rem;
             }
@@ -383,7 +489,6 @@
                 <li><a href="#sobre">Sobre</a></li>
                 <li><a href="#experiencia">Experiência</a></li>
                 <li><a href="#projetos">Projetos</a></li>
-                <li><a href="#habilidades">Habilidades</a></li>
                 <li><a href="#contato">Contato</a></li>
             </ul>
         </div>
@@ -393,8 +498,9 @@
     <section class="hero" id="home">
         <div id="canvas-container"></div>
         <div class="hero-content">
-            <h1 class="hero-title">Bem-vindo ao Portfólio de<br>Matheus Frota</h1>
-            <p class="hero-subtitle">Desenvolvedor Backend | Python | React | Next | SQL</p>
+            <h1 class="hero-title"><br> Matheus Frota</h1>
+            <p class="hero-subtitle">Sou um desenvolvedor full stack júnior com foco em criar soluções tecnológicas que realmente façam diferença.</p>
+            <a class="hero-cta" href="#projetos">Ver projetos</a>
         </div>
         <div class="scroll-indicator"></div>
     </section>
@@ -513,18 +619,23 @@
         </p>
         <div class="projects-grid">
             <!-- Projeto 1: Dashboard Meta Analytics -->
-            <div class="project-card">
-                <h3 class="project-title">Dashboard Meta Analytics</h3>
-                <p class="project-description">
-                    Sistema de monitoramento de métricas de redes sociais (Facebook e Instagram) desenvolvido para MSL Comunicação.
-                    Integração com Meta Graph API, armazenamento em Supabase e interface em Flask/React para visualização de KPIs em tempo quase real.
-                </p>
-                <div style="margin-top: 1rem; display: flex; flex-wrap: wrap; gap: 0.5rem;">
-                    <span style="background: rgba(102,126,234,0.2); padding: 0.3rem 0.6rem; border-radius: 10px; font-size: 0.8rem;">Python</span>
-                    <span style="background: rgba(102,126,234,0.2); padding: 0.3rem 0.6rem; border-radius: 10px; font-size: 0.8rem;">Flask</span>
-                    <span style="background: rgba(102,126,234,0.2); padding: 0.3rem 0.6rem; border-radius: 10px; font-size: 0.8rem;">React</span>
-                    <span style="background: rgba(102,126,234,0.2); padding: 0.3rem 0.6rem; border-radius: 10px; font-size: 0.8rem;">Meta API</span>
-                    <span style="background: rgba(102,126,234,0.2); padding: 0.3rem 0.6rem; border-radius: 10px; font-size: 0.8rem;">Supabase</span>
+            <div class="project-card preview">
+                <div class="project-cover">
+                    <img src="image2.png" alt="Pre-visualizacao do Dashboard Meta Analytics">
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">Dashboard Meta Analytics</h3>
+                    <p class="project-description">
+                        Sistema de monitoramento de métricas de redes sociais (Facebook e Instagram) desenvolvido para MSL Comunicação.
+                        Integração com Meta Graph API, armazenamento em Supabase e interface em Flask/React para visualização de KPIs em tempo quase real.
+                    </p>
+                    <div class="project-meta">
+                        <span class="pill">Python</span>
+                        <span class="pill">Flask</span>
+                        <span class="pill">React</span>
+                        <span class="pill">Meta API</span>
+                        <span class="pill">Supabase</span>
+                    </div>
                 </div>
             </div>
 
@@ -543,6 +654,29 @@
                 </div>
             </div>
 
+            <!-- Projeto 3: Landing Page E-book -->
+            <div class="project-card preview">
+                <div class="project-cover">
+                    <img src="image.png" alt="Pre-visualizacao da landing page A crianca e as novas tecnologias">
+                </div>
+                <div class="project-body">
+                    <h3 class="project-title">Landing Page E-book virtual (A criança e as novas tecnologias)</h3>
+                    <p class="project-description">
+                        Landing page desenvolvida em HTML, CSS e JavaScript para comercializar o livro físico e digital
+                        “A criança e as novas tecnologias”. Estruturei seção de hero, destaques do conteúdo e chamada
+                        para compra, focando em conversão e visual limpo.
+                    </p>
+                    <div class="project-meta">
+                        <span class="pill">HTML</span>
+                        <span class="pill">CSS</span>
+                        <span class="pill">JavaScript</span>
+                    </div>
+                    <div class="project-actions">
+                        <a class="project-link" href="https://albertocid.com.br" target="_blank" rel="noopener">Visitar site</a>
+                    </div>
+                </div>
+            </div>
+
             <!-- Espaço para adicionar mais projetos -->
             <div class="project-card" style="border: 2px dashed rgba(255,255,255,0.2); display: flex; align-items: center; justify-content: center; min-height: 250px;">
                 <div style="text-align: center;">
@@ -550,33 +684,6 @@
                     <p style="color: rgba(255,255,255,0.6);">Mais projetos em breve</p>
                 </div>
             </div>
-        </div>
-    </section>
-
-    <!-- Skills Section -->
-    <section class="section" id="habilidades">
-        <h2 class="section-title">Habilidades</h2>
-        <div class="skills-container">
-            <div class="skill-item">Python</div>
-            <div class="skill-item">Node.js</div>
-            <div class="skill-item">React</div>
-            <div class="skill-item">Next.js</div>
-            <div class="skill-item">JavaScript</div>
-            <div class="skill-item">Java</div>
-            <div class="skill-item">Express</div>
-            <div class="skill-item">Flask</div>
-            <div class="skill-item">Flutter</div>
-            <div class="skill-item">MySQL</div>
-            <div class="skill-item">PostgreSQL</div>
-            <div class="skill-item">Supabase</div>
-            <div class="skill-item">MongoDB</div>
-            <div class="skill-item">REST APIs</div>
-            <div class="skill-item">Git</div>
-            <div class="skill-item">Docker</div>
-            <div class="skill-item">AWS</div>
-            <div class="skill-item">WordPress</div>
-            <div class="skill-item">Scrum/Agile</div>
-            <div class="skill-item">DevOps</div>
         </div>
     </section>
 
